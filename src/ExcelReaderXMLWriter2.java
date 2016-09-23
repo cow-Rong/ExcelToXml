@@ -43,8 +43,9 @@ public class ExcelReaderXMLWriter2 {
             throws IOException {
         FileOutputStream fo = new FileOutputStream(f);// 得到输入流
         Document doc = readExcell(stream);// 读取EXCEL函数
-        Format format = Format.getCompactFormat().setEncoding("GBK")
+        Format format = Format.getCompactFormat().setEncoding("gb2312")
                 .setIndent("");
+        //GBK ; gb2312
         XMLOutputter XMLOut = new XMLOutputter(format);// 在元素后换行，每一层元素缩排四格
         XMLOut.output(doc, fo);
         fo.close();
@@ -77,7 +78,7 @@ public class ExcelReaderXMLWriter2 {
                     for (int k = 0; k < cellNum; k++) {
                         HSSFCell cell = row.getCell((short) k);
                         String temp = get(k);
-                        System.out.print(k+"    "+temp+":");
+                        System.out.print(k+" "+temp+":");
                         Element item = new Element(temp);
                         if (cell == null) {
                             item.setText("");
@@ -165,6 +166,9 @@ public class ExcelReaderXMLWriter2 {
         case 2:
             test = "phone";
             break;
+        case 3:
+        	test = "email";
+        	break;
         default:
         }
         return test;
